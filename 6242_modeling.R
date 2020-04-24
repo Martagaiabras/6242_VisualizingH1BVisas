@@ -49,8 +49,6 @@ test_categorized$STATE <- as.factor(test_categorized$STATE)
 
 #get 1/8th of the rows
 train_new = train[sample(nrow(train),nrow(train)/8),]
-train_categorized_new = train_categorized[sample(nrow(train_categorized),nrow(train_categorized)/8),]
-train_balanced_categorized_new = train_balanced_categorized[sample(nrow(train_balanced_categorized),nrow(train_balanced_categorized)/8),]
 
 #logistic regression 
 model_1 <- glm(CERTIFIED ~ STATE + SOC_NAME + FULL_TIME + PREVAILING_WAGE, data=train_new, family="binomial")
@@ -59,13 +57,13 @@ lr_pred <- ifelse(lr_prob > 0.50, 1, 0)
 test_categorized$logistic_regression1 <- lr_pred
 
 #logistic regression (categorized)
-model_2 <- glm(CERTIFIED ~ STATE + SOC_NAME + FULL_TIME + PREVAILING_WAGE, data=train_categorized_new, family="binomial")
+model_2 <- glm(CERTIFIED ~ STATE + SOC_NAME + FULL_TIME + PREVAILING_WAGE, data=train_categorized, family="binomial")
 lr_prob <- predict(model_2, test_categorized, type="response")
 lr_pred <- ifelse(lr_prob > 0.50, 1, 0)
 test_categorized$logistic_regression2 <- lr_pred
 
 #logistic regression (categorized and balanced)
-model_3 <- glm(CERTIFIED ~ STATE + SOC_NAME + FULL_TIME + PREVAILING_WAGE, data=train_balanced_categorized_new, family="binomial")
+model_3 <- glm(CERTIFIED ~ STATE + SOC_NAME + FULL_TIME + PREVAILING_WAGE, data=train_balanced_categorized, family="binomial")
 lr_prob <- predict(model_3, test_categorized, type="response")
 lr_pred <- ifelse(lr_prob > 0.50, 1, 0)
 test_categorized$logistic_regression3 <- lr_pred
@@ -77,13 +75,13 @@ svm_pred <- ifelse(svm_prob > 0.50, 1, 0)
 test_categorized$svm1 <- svm_prob
 
 #svm (categorized)
-model_5 <- parallelSVM(CERTIFIED ~ STATE + SOC_NAME + FULL_TIME + PREVAILING_WAGE, data=train_categorized_new, numberCores = 8, samplingSize = 0.2)
+model_5 <- parallelSVM(CERTIFIED ~ STATE + SOC_NAME + FULL_TIME + PREVAILING_WAGE, data=train_categorized, numberCores = 8, samplingSize = 0.2)
 svm_prob <- predict(model_5, test_categorized, type="response")
 svm_pred <- ifelse(svm_prob > 0.50, 1, 0)
 test_categorized$svm2 <- svm_prob
 
 #svm (categorized and balanced)
-model_6 <- parallelSVM(CERTIFIED ~ STATE + SOC_NAME + FULL_TIME + PREVAILING_WAGE, data=train_balanced_categorized_new, numberCores = 8, samplingSize = 0.2)
+model_6 <- parallelSVM(CERTIFIED ~ STATE + SOC_NAME + FULL_TIME + PREVAILING_WAGE, data=train_balanced_categorized, numberCores = 8, samplingSize = 0.2)
 svm_prob <- predict(model_6, test_categorized, type="response")
 svm_pred <- ifelse(svm_prob > 0.50, 1, 0)
 test_categorized$svm3 <- svm_prob
@@ -95,13 +93,13 @@ knn_pred <- ifelse(knn_prob > 0.50, 1, 0)
 test_categorized$knn1 <- knn_pred
 
 #knn (categorized)
-model_8 = kknn(CERTIFIED ~ STATE + SOC_NAME + FULL_TIME + PREVAILING_WAGE, train_categorized_new, test_categorized, distance = 2, k = 100, scale = TRUE)
+model_8 = kknn(CERTIFIED ~ STATE + SOC_NAME + FULL_TIME + PREVAILING_WAGE, train_categorized, test_categorized, distance = 2, k = 100, scale = TRUE)
 knn_prob <- fitted.values(model_8)
 knn_pred <- ifelse(knn_prob > 0.50, 1, 0)
 test_categorized$knn2 <- knn_pred
 
 #knn (categorized and balanced)
-model_9 = kknn(CERTIFIED ~ STATE + SOC_NAME + FULL_TIME + PREVAILING_WAGE, train_balanced_categorized_new, test_categorized, distance = 2, k = 100, scale = TRUE)
+model_9 = kknn(CERTIFIED ~ STATE + SOC_NAME + FULL_TIME + PREVAILING_WAGE, train_balanced_categorized, test_categorized, distance = 2, k = 100, scale = TRUE)
 knn_prob <- fitted.values(model_9)
 knn_pred <- ifelse(knn_prob > 0.50, 1, 0)
 test_categorized$knn3 <- knn_pred

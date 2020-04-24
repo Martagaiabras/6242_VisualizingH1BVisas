@@ -37,4 +37,4 @@ Using OpenRefine, the following data cleaning tasks with both datasets must be d
 
 The cleaned data can then be downloaded and imported into R Studio for preprocessing with 6242_preprocessing.R.
 Using 6242_category_reduction.ipynb with the preprocessed data reduces the number of categories within the categorical variables.
-6242_modeling.R can be used on the data to build the models and get predicted values, and accuracy can be calculated after exporting the predicted values to a csv file.
+6242_modeling.R can then be used on the data to build the models and get predicted values, and accuracy can be calculated after exporting the actual and predicted values to a csv file.

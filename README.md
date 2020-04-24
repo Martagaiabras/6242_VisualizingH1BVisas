@@ -26,4 +26,15 @@ The following software must be installed.
 
 EXECUTION
 
+Using OpenRefine, the following data cleaning tasks with both datasets must be done. 
+1. Remove columns which contain irrelevant and/or redundant information.
+2. Remove rows with missing values. 
+3. Remove rows which provide hourly, weekly, biweekly, or monthly wages. 
+4. Remove rows which pertain to other types of visas.
+5. Remove rows which pertain to certified-withdrawn or withdrawn statuses.
+6. Resolve spelling inconsistencies within the job category and work-site state columns.
+7. Group similar categories within the job category column.
 
+The cleaned data can then be downloaded and imported into R Studio for preprocessing with 6242_preprocessing.R.
+Using 6242_category_reduction.ipynb with the preprocessed data reduces the number of categories within the categorical variables.
+Lastly, 6242_modeling.R can be used on the data to build the models and get predicted values.

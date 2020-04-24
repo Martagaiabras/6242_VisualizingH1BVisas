@@ -8,7 +8,7 @@ The data is also used to build a model that predicts whether an H-1B visa applic
 
 The visualization tool and predictive model will assist international students in making more informed decisions when seeking employment within the United States.
 
-Data on H-1B visa applications from 2011-2016 can be found at https://www.kaggle.com/nsharan/h-1b-visa. It contains approximately 3 million rows and 52 columns. Data on H-1B visa applications from 2017 can be found at https://www.kaggle.com/jonamjar/h1b-data-set-2017. It contains approximately 600,000 rows and 10 columns. As not all columns are necessary and some rows have missing and/or inconsistent information, this data is first cleaned and filtered with OpenRefine.
+Data on H-1B visa applications from 2011-2016 can be found at https://www.kaggle.com/nsharan/h-1b-visa. It contains approximately 3 million rows and 52 columns. This data is for training the models. Data on H-1B visa applications from 2017 can be found at https://www.kaggle.com/jonamjar/h1b-data-set-2017. It contains approximately 600,000 rows and 10 columns. This data is for testing the models. As not all columns are necessary and some rows have missing and/or inconsistent information, this data is first cleaned and filtered with OpenRefine.
 
 With the refined data, the predictive model is built with the following codes.
 
